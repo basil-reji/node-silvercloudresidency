@@ -1,0 +1,119 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+@import "./theme";
+
+body {
+    width: 100%;
+    min-height: 100vh;
+    background-color: $background_color_3;
+    display: flex;
+    flex-direction: column;
+    font-family: $font_family_2;
+}
+
+@import "./admin/nav/sidebar";
+@import "./admin/nav/header";
+@import "./admin/nav/footer";
+
+:root {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: "Open Sans", sans-serif;
+    background: #f6f9ff;
+    color: #444444;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: $font_family_1;
+}
+
+#main {
+    width: calc(100% - 5rem);
+    position: absolute;
+    min-height: 100%;
+    top: 0;
+    right: 0;
+    z-index: 1;
+    padding: 0rem 2rem;
+    padding-top: 5rem;
+    overflow-x: hidden;
+    transition: all 0.3s ease-in-out;
+
+    display: flex;
+    flex-direction: column;
+
+    &.shrink {
+        width: 85%;
+    }
+}
+
+@media only screen and (max-width: 1080px) {
+    #main {
+        width: 100%;
+        padding: 0rem 1rem;
+        padding-top: 5rem;
+
+        &.shrink {
+            width: 100%;
+        }
+    }
+}
+
+section {
+    width: 100%;
+}
+
+.pagetitle {
+    margin: 0rem;
+    margin-bottom: 1rem;
+
+    h2 {
+        font-size: 24px;
+        margin-bottom: 0;
+        font-weight: 600;
+        color: rgba($color: $color_4, $alpha: 0.9);
+    }
+
+    .breadcrumb {
+        font-size: 14px;
+        font-family: "Nunito", sans-serif;
+        color: rgba($color: $color_4, $alpha: 0.5);
+        font-weight: 600;
+
+        a {
+            color: rgba($color: $color_4, $alpha: 0.5);
+            transition: 0.3s;
+            text-decoration: none;
+
+            &:hover {
+                color: rgba($color: $color_4, $alpha: 0.75);
+            }
+        }
+
+        .breadcrumb-item {
+            &::before {
+                color: rgba($color: $color_4, $alpha: 0.5);
+            }
+        }
+
+        .active {
+            color: rgba($color: $color_4, $alpha: 0.85);
+            font-weight: 600;
+        }
+    }
+}
+
+@import './admin/defaults';
+@import './admin/components';
+@import "./admin/dashboard";
+@import "./admin/admins";

@@ -1,0 +1,208 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css" />
+<section id="account" class="section">
+    <div class="row justify-content-center align-items-center">
+        <div class="col-12 col-md-10 col-lg-8 card">
+            <div class="card-body p-4">
+
+                <ul class="nav nav-tabs nav-tabs-bordered">
+
+                    <li class="nav-item">
+                        <button class="nav-link active" data-bs-toggle="tab"
+                            data-bs-target="#profile-overview">Overview</button>
+                    </li>
+
+                    <li class="nav-item">
+                        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">Edit
+                            Profile</button>
+                    </li>
+
+                    <li class="nav-item">
+                        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-change-password">Change
+                            Password</button>
+                    </li>
+
+                </ul>
+                <div class="tab-content py-2">
+
+                    <div class="tab-pane fade show active profile-overview" id="profile-overview">
+
+                        <h5 class="card-title">Profile Details</h5>
+
+                        {{#with user}}
+                        <div class="row mb-3">
+                            <div class="col-lg-3 col-md-4 label">First Name</div>
+                            <div class="col-lg-9 col-md-8">{{fname}}</div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-lg-3 col-md-4 label">Surame</div>
+                            <div class="col-lg-9 col-md-8">{{sname}}</div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-lg-3 col-md-4 label">Email ID</div>
+                            <div class="col-lg-9 col-md-8">{{email}}</div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-lg-3 col-md-4 label">Phone</div>
+                            <div class="col-lg-9 col-md-8">{{phone}}</div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-lg-3 col-md-4 label">Role</div>
+                            <div class="col-lg-9 col-md-8">{{role}}</div>
+                        </div>
+                        {{#each profile.primary_address}}
+                        <div class="row mb-3">
+                            <div class="col-lg-3 col-md-4 label">{{capsFirst @key}}</div>
+                            <div class="col-lg-9 col-md-8">{{this}}</div>
+                        </div>
+                        {{/each}}
+                        {{/with}}
+                    </div>
+
+                    <div class="tab-pane fade profile-edit" id="profile-edit">
+
+                        <h5 class="card-title">Edit Profile</h5>
+                        {{#with user}}
+                        <form id="account_update" action="/admin/account/update" method="post"
+                            enctype="multipart/form-data">
+                            <div class="row mb-3">
+                                <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Profile Image</label>
+                                <div class="col-md-8 col-lg-9">
+                                    <img src="{{profile.image}}" alt="Profile" style="max-height: 5rem;width:auto;">
+                                    <div class="pt-2">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label for="firstName" class="col-md-4 col-lg-3 col-form-label">First Name</label>
+                                <div class="col-md-8 col-lg-9">
+                                    <input name="fname" type="text" class="form-control" id="fullName" value="{{fname}}"
+                                        required>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label for="Surname" class="col-md-4 col-lg-3 col-form-label">Surname</label>
+                                <div class="col-md-8 col-lg-9">
+                                    <input name="sname" type="text" class="form-control" id="SurName" value="{{sname}}">
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label for="Phone" class="col-md-4 col-lg-3 col-form-label">Phone</label>
+                                <div class="col-md-8 col-lg-9">
+                                    <input name="phone" type="tel" class="form-control" id="phone" value="{{phone}}">
+                                </div>
+                            </div>
+
+                            {{#each profile.primary_address}}
+                            <div class="row mb-3">
+                                <label for="{{capsFirst @key}}" class="col-md-4 col-lg-3 col-form-label">{{capsFirst
+                                    @key}}</label>
+                                <div class="col-md-8 col-lg-9">
+                                    <input name="{{@key}}" type="text" class="form-control" id="{{@key}}" placeholder=""
+                                        value="{{this}}">
+                                </div>
+                            </div>
+                            {{/each}}
+
+                            <div class="text-center pt-4">
+                                <button type="submit" class="btn-primary">Save Changes</button>
+                            </div>
+                        </form>
+                        {{/with}}
+
+                    </div>
+
+                    <div class="tab-pane fade" id="profile-change-password">
+                        <h5 class="card-title">Change You Password</h5>
+
+                        <form class="">
+
+                            <div class="row mb-3">
+                                <label for="currentPassword" class="col-md-4 col-lg-3 col-form-label">Current
+                                    Password</label>
+                                <div class="col-md-8 col-lg-9">
+                                    <input name="password" type="password" class="form-control" id="currentPassword">
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label for="newPassword" class="col-md-4 col-lg-3 col-form-label">New Password</label>
+                                <div class="col-md-8 col-lg-9">
+                                    <input name="newpassword" type="password" class="form-control" id="newPassword">
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label for="renewPassword" class="col-md-4 col-lg-3 col-form-label">Re-enter New
+                                    Password</label>
+                                <div class="col-md-8 col-lg-9">
+                                    <input name="renewpassword" type="password" class="form-control" id="renewPassword">
+                                </div>
+                            </div>
+
+                            <div class="text-center pt-4">
+                                <button type="submit" class="btn-primary">Change Password</button>
+                            </div>
+                        </form><!-- End Change Password Form -->
+
+                    </div>
+
+                </div><!-- End Bordered Tabs -->
+
+            </div>
+        </div>
+    </div>
+</section>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
+<script>
+    var input = document.querySelector("#phone");
+    window.intlTelInput(input, ({
+        preferredCountries: ["in"],
+        utilsScript:
+            "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
+    }));
+
+    $(document).ready(function () {
+
+        $('.iti__flag-container').click(function () {
+            var countryCode = $('.iti__selected-flag').attr('title');
+            var countryCode = countryCode.replace(/[^0-9]/g, '')
+            $('#phone').val("");
+            $('#phone').val("+" + countryCode + " " + $('#phone').val());
+        });
+
+        $("#account_update").submit(function (e) {
+            e.preventDefault();
+
+            var $inputs = $('#account_update :input');
+
+            var values = {};
+            $inputs.each(function () {
+                values[this.name] = $(this).val();
+            });
+
+            var countryCode = $('.iti__selected-flag').attr('title');
+            var countryCode = countryCode.replace(/[^0-9]/g, '')
+
+            if (!(values.phone.includes(countryCode))) {
+                values.phone = `+${countryCode} ${values.phone.replace(" ", "").replace("0", "")}`
+            }
+
+            $.ajax({
+                url: `/admin/account/update`,
+                method: 'post',
+                data: values,
+                success: (response) => {
+                    if (response.status == true) {
+                        console.log('Success');
+                    } else {
+                        console.log('Error');
+                        console.log(response.message);
+                    }
+                }
+            })
+        })
+    });
+</script>

@@ -1,0 +1,187 @@
+@mixin box-shadow-1 {
+    box-shadow: 0px 0 30px rgba($color: $color_4, $alpha: 0.1);
+}
+
+
+.card {
+    border: none;
+    border-radius: 0.1rem;
+    box-shadow: 0px 0 30px rgba($color: $color_4, $alpha: 0.1);
+
+    .card-header,
+    .card-footer {
+        border-color: $color_1;
+        background-color: $white;
+        color: rgba($color: $color_2, $alpha: 0.5);
+        padding: 1rem;
+    }
+
+    .card-title {
+        padding: 1.2rem 0 1rem 0;
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: rgba($color: $color_4, $alpha: 0.85);
+        font-family: "Poppins", sans-serif;
+
+        span {
+            color: rgba($color: $color_4, $alpha: 0.5);
+            font-size: 1rem;
+            font-weight: 400;
+        }
+    }
+
+    .card-body {
+        padding: 0 1.2rem 1.2rem 1.2rem;
+    }
+
+    .card-img-overlay {
+        background-color: rgba(255, 255, 255, 0.6);
+    }
+
+}
+
+.nav-tabs-bordered {
+    border-bottom: 2px solid #ebeef4;
+
+    .nav-link {
+        margin-bottom: -2px;
+        border: none;
+        color: rgba($color: $color_4, $alpha: 0.5);
+
+        &.active {
+            background-color: $white;
+            color: $color_2;
+            border-bottom: 2px solid $color_2;
+        }
+    }
+}
+
+.nav-tabs-bordered .nav-link:hover,
+.nav-tabs-bordered .nav-link:focus {
+    color: $color_2;
+}
+
+.btn-ico {
+    padding: 0.1rem 0.25rem;
+    font-size: 1rem;
+    background-color: transparent;
+    border: none;
+
+    &.red {
+        color: $color_danger;
+    }
+
+    &.blue {
+        color: $color_3;
+    }
+}
+
+.forms {
+    background-color: $white;
+    padding: 2rem;
+    @include box-shadow-1;
+
+    .error {
+        text-align: center;
+        color: $color_error;
+    }
+
+    .log_head {
+        text-align: center;
+        margin-bottom: 1rem;
+
+        h3 {
+            color: $color_4;
+            // margin-bottom: rem;
+
+            span {
+                color: $color_2;
+                font-weight: 700;
+            }
+        }
+
+        p {
+            color: rgba($color: $color_4, $alpha: 0.5);
+        }
+    }
+
+    form {
+        margin: 0.5rem 0rem;
+
+        .form-group {
+            margin: 1rem 0rem;
+            margin-top: 1.5rem;
+            color: rgba($color: $color_4, $alpha: 0.9);
+
+
+            .form-control {
+                margin: 0;
+                padding: 0.5rem 1.0rem;
+                height: 2.5rem;
+                border-radius: 0.1rem;
+                border: 1px solid rgba($color: $color_4, $alpha: 0.1);
+                color: $color_4;
+                font-family: $font_family_2;
+
+                &:active,
+                &:focus {
+                    box-shadow: none;
+                    border: 1px solid $color_2;
+                }
+
+                &::placeholder {
+                    color: rgba($color: $color_4, $alpha: 0.4);
+                }
+            }
+
+            &:last-child{
+                padding-bottom: 0;
+                margin-bottom: 0;
+            }
+
+        }
+
+        .btn {
+            width: 100%;
+            border: 2px solid $color_4;
+            background-color: transparent;
+            padding: 0.5rem 1.5rem;
+            margin: 0;
+            margin-top: 1rem;
+            color: $color_4;
+            transition: all 0.3s ease-in-out;
+
+            &:hover {
+                color: $white;
+                background-color: $color_4;
+            }
+        }
+
+        .btn-primary{
+            width: 100%;
+            border: 2px solid rgba($color: $color_2, $alpha: 1);
+            background-color: transparent;
+            padding: 0.5rem 1.5rem;
+            margin: 0;
+            margin-top: 1rem;
+            background-color: rgba($color: $color_2, $alpha: 1);
+            color: $white;
+            transition: all 0.3s ease-in-out;
+
+            &:hover {
+                border-color: $color_3;
+                color: $white;
+                background-color: $color_3;
+            }
+        }
+    }
+
+    .log_footer {
+        text-align: center;
+        font-size: 0.8rem;
+
+        a {
+            font-weight: 600;
+        }
+    }
+}

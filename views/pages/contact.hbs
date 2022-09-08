@@ -1,0 +1,117 @@
+<section id="contact" class="contact section-bg">
+    <div class="container">
+
+        <div class="section-title">
+            <h2>Contact Us</h2>
+        </div>
+
+        <div class="map">
+            <iframe
+                src="https://maps-api-ssl.google.com/maps?hl=en&amp;ll=11.643733,76.112914&amp;output=embed&amp;q=Sliver+Cloud+Residency+Opposite+KVR+Bajaj,+Muttil+South,+Kerala+673122,+India+(OYO+Home+41429+Way+Side+Silver+Cloud+Residency)&amp;z=17"
+                allowfullscreen>
+            </iframe>
+        </div>
+
+        <div class="row justify-content-center align-items-center">
+
+            <div class="col-md-6">
+                <div class="row gx-4 gy-4">
+
+                    <div class="col-12 col-md-6 d-flex align-items-stretch">
+                        <div class="info-box ">
+                            <i class="bi bi-geo-alt"></i>
+                            <h3>Our Address</h3>
+                            <p>Muttil, Kalpetta, Wayanad
+                                Kerala - 673122</p>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-md-6 d-flex align-items-stretch">
+                        <div class="info-box  ">
+                            <i class="bi bi-envelope"></i>
+                            <h3>Email Us</h3>
+                            <p>info@silvercloudresidency.com</p>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-md-6 d-flex align-items-stretch">
+                        <div class="info-box  ">
+                            <i class="bi bi-telephone"></i>
+                            <h3>Call Us</h3>
+                            <p>04936 298 444</p>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-md-6 d-flex align-items-stretch">
+                        <div class="info-box  ">
+                            <i class="bi bi-whatsapp"></i>
+                            <h3>WhatsApp </h3>
+                            <p>+91 9847454440</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12 col-lg-6">
+                <form id="contact-form" action="/contact" method="post" name="contact-form" class="contact-form">
+                    <div class="row">
+                        <div class="col-md-6 form-group">
+                            <input type="text" name="name" class="form-control" id="name" placeholder="Your Name"
+                                required>
+                        </div>
+                        <div class="col-md-6 form-group mt-3 mt-md-0">
+                            <input type="email" class="form-control" name="email" id="email" placeholder="Your Email"
+                                required>
+                        </div>
+                    </div>
+                    <div class="form-group mt-3">
+                        <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject"
+                            required>
+                    </div>
+                    <div class="form-group mt-3">
+                        <textarea class="form-control" name="message" rows="5" placeholder="Message"
+                            required></textarea>
+                    </div>
+                    <div class="my-3">
+                        <div id="sent-message" class="sent-message">Your message has been sent. Thank you!</div>
+                        <div id="error-message" class="error-message">Message canot deliver. Please Try again.</div>
+                    </div>
+                    <div class="text-center">
+                        <button class="btn btn-fill" type="submit">Send Message</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+{{!-- <section class="m-5">
+    <form id="contact-form" action="/contact" method="post" name="contact-form">
+        <div class="row">
+            <div class="col-md-6 form-group" data-aos="fade-right">
+                <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
+            </div>
+            <div class="col-md-6 form-group mt-3 mt-md-0" data-aos="fade-left">
+                <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>
+            </div>
+        </div>
+        <div class="form-group mt-3" data-aos="fade-up">
+            <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
+        </div>
+        <div class="form-group mt-3" data-aos="fade-up">
+            <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
+        </div>
+        <div class="text-center" data-aos="zoom-in-up">
+            <div class="my-3">
+                <div id="loading" class="loading" style="display: none;">Loading</div>
+                <div id="error-message" class="error-message" style="display: none;">Something went wrong!. Try again.
+                </div>
+                <div id="sent-message" class="sent-message" style="display: none;">Your message has been sent. Thank
+                    you!</div>
+            </div>
+            <button type="submit">Send Message</button>
+        </div>
+    </form>
+</section> --}}

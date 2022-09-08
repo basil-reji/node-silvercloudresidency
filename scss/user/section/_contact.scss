@@ -1,0 +1,147 @@
+.contact {
+
+    .map{
+        margin: 2rem 0rem;
+        background-color: rgba($color: $white, $alpha: 1);
+        width: 100%;
+        border-radius: 1.5rem;
+        overflow: hidden;
+        @include box-shadow-1;
+        transition: all 0.3s ease;
+        padding: 0.2rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &:hover{
+            @include box-shadow-2;
+        }
+
+        iframe{
+            border-radius: 1.5rem;
+            width: 100%;
+            height: 60vh;
+
+        }
+    }
+
+    .info-box {
+        color: rgba($color: $dark_color_1, $alpha: 0.1);
+        cursor: pointer;
+        text-align: center;
+        padding: 2rem;
+        border-radius: 0.5rem;
+        background: $white;
+        width: 100%;
+        height: auto;
+        @include box-shadow-1;
+        transition: all 0.3s ease;
+
+        i {
+            font-size: 2rem;
+            color: $color_4;
+            border-radius: 50%;
+            padding: 0.8rem;
+            transition: all 0.3s ease;
+        }
+
+        h3 {
+            font-size: 1.25rem;
+            color: $color_3;
+            font-weight: 700;
+            transition: all 0.3s ease;
+        }
+
+        p {
+            text-align: center;
+            font-size: 1rem;
+            margin-bottom: 0;
+            transition: all 0.3s ease;
+        }
+
+        &:hover{
+            @include box-shadow-2;
+
+            i{
+                color: $color_1;
+            }
+
+            h3{
+                color: $color_1;
+            }
+
+            p{
+                color: rgba($color: $color_4, $alpha: 0.8)
+            }
+        }
+    }
+
+    .contact-form {
+        border-radius: 0.5rem;
+        @include box-shadow-1;
+        padding: 2rem 2rem;
+        background: $white;
+
+        &:hover, &:active, &:focus{
+            @include box-shadow-2;
+        }
+
+        input, textarea{
+            border-radius: 0.1rem;
+            padding: 0.65rem 1rem;
+            margin: 0.1rem 0rem;
+            color: $dark_color_2;
+
+            &:hover, &:active, &:focus{
+                box-shadow: none;
+            }
+
+            &:focus{
+                border-color: $color_1;
+            }
+
+            &::placeholder{
+                color: rgba($color: $dark_color_2, $alpha: 0.5);
+                font-family: $font_family_2;
+            }
+        }
+
+        .sent-message{
+            display: none;
+            border-radius: 0.5rem;
+            background-color: $color_success;
+            color: $white;
+            padding: 0.5rem;
+            text-align: center;
+        }
+        .error-message{
+            display: none;
+            border-radius: 0.5rem;
+            background-color: $color_error;
+            color: $white;
+            padding: 0.5rem;
+            text-align: center;
+        }
+    }
+}
+
+
+@-webkit-keyframes animate-loading {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes animate-loading {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}

@@ -123,17 +123,6 @@ $(document).ready(() => {
         selector: '.gallery-lightbox'
     });
 
-
-
-    // window.addEventListener('load', () => {
-    //     let galleryContainer = select('.gallery-container');
-    //     if (galleryContainer) {
-    //         let galleryIsotope = new Isotope(galleryContainer, {
-    //             itemSelector: '.gallery-item',
-    //         });
-    //     }
-
-    // });
 });
 
 $("#contact-form").submit(function (e) {

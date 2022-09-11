@@ -21,6 +21,12 @@
             </li>
             {{#if user.permission.full_control}}
             <li>
+                <a href="/admin/facilities/" {{#if facilities_page}}class="active"{{/if}}>
+                    <i class="ri-archive-{{#if facilities_page}}fill{{else}}line{{/if}} sico"></i>
+                    <h5>facilities</h5>
+                </a>
+            </li>
+            <li>
                 <a href="/admin/admins/" {{#if admins_page}}class="active"{{/if}}>
                     <i class="ri-shield-user-{{#if admins_page}}fill{{else}}line{{/if}} sico"></i>
                     <h5>Admins</h5>

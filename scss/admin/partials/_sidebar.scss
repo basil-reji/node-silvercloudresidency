@@ -24,27 +24,42 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        cursor: pointer;
 
-        a{
+        a {
             text-decoration: none;
             color: $color_1;
-
-            &:hover, &:active, &:focus{
-                color: $color_2;
-            }
+            transition: all 0.3s ease;
         }
 
         #slogo {
             color: $color_1;
             font-size: 1.5rem;
             transform: translate(0%, -20%);
-            transition: all 0.3s ease-in-out;
+            transition: all 0.3s ease;
         }
 
-        h4{
+        h4 {
             margin: 0rem 0.5rem;
             font-size: 1.3rem;
             transform: translate(0%, -25%);
+            transition: all 0.3s ease
+        }
+
+        &:hover,
+        &:active,
+        &:focus {
+            a {
+                color: $white;
+            }
+
+            #slogo {
+                color: $white;
+            }
+
+            h4 {
+                color: $white;
+            }
         }
 
         transition: all 0.3s ease-in-out;
@@ -53,12 +68,14 @@
     #scont {
         margin: auto 0;
         width: 100%;
+
         ul {
             list-style: none;
             text-decoration: none;
             padding: 0;
+
             li {
-                // background-color: $color3;
+
                 a {
                     padding: 0rem 0.8rem;
                     height: 2.7rem;
@@ -72,8 +89,8 @@
                     border: 2px solid rgba($color: $color_1, $alpha: 0);
 
                     transition: 0.3s ease-in-out;
-                    transition-property: background-color,border, box-shadow;
-                    
+                    transition-property: background-color, border, box-shadow;
+
                     .sico {
                         font-size: 1.3rem;
                         transition: all 0.3s ease-in-out;
@@ -94,13 +111,14 @@
 
                     &:hover,
                     &.active {
+
                         .sico,
                         h5 {
-                            color: $color_1;
+                            color: $white;
                         }
 
-                        background-color: rgba($color: $color_2, $alpha: 0.8);
-                        border: 2px solid rgba($color: $color_2, $alpha: 0.05);
+                        background-color: rgba($color: $color_1, $alpha: 0.8);
+                        border: 2px solid rgba($color: $color_1, $alpha: 0.05);
                         box-shadow: 0px 4.02px 34.17px 0px rgba(0, 0, 0, 0.05);
                     }
                 }
@@ -108,7 +126,7 @@
         }
     }
 
-    #sfoot{
+    #sfoot {
         height: 2rem;
         margin: 1rem 0rem;
         width: 100%;
@@ -119,16 +137,17 @@
 
         color: $color_2;
 
-        a{
+        a {
             text-decoration: none;
             color: $color_2;
             transition: all 0.3s ease;
 
-            &:hover{
+            &:hover {
                 color: $color_2;
             }
 
-            &:active, &:focus{
+            &:active,
+            &:focus {
                 text-decoration: none;
                 color: $color_2;
             }
@@ -139,8 +158,8 @@
         padding: 0.5rem 1rem;
         width: 5rem;
 
-        #shead{
-            h4{
+        #shead {
+            h4 {
                 display: none;
             }
         }
@@ -150,6 +169,7 @@
                 li {
                     a {
                         padding: 0rem 0.7rem;
+
                         .sico {
                             font-size: 1.5rem;
                         }
@@ -162,9 +182,10 @@
             }
         }
 
-        #sfoot{
+        #sfoot {
             color: transparent;
-            a{
+
+            a {
                 display: none;
             }
         }
@@ -175,17 +196,18 @@
     #sidebar {
         width: 15rem;
 
-        #scont{
+        #scont {
             margin: 1rem 0rem;
             margin-bottom: auto;
         }
-        
+
         &.close {
             transform: translateX(-102%);
+
             #scont {
                 ul {
                     li {
-                        a {    
+                        a {
                             h5 {
                                 display: block;
                             }

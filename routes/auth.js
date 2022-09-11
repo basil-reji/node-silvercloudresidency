@@ -26,38 +26,38 @@ router.get('/login', isUser, function (req, res, next) {
     });
 });
 
-router.get('/signup', isUser, function (req, res, next) {
-    let message = req.flash('message');
-    res.render('auth/signup', {
-        title: `Signup | ${app_name}`,
-        noHeader: true,
-        noFooter: true,
-        app_name,
-        message
-    });
-});
+// router.get('/signup', isUser, function (req, res, next) {
+//     let message = req.flash('message');
+//     res.render('auth/signup', {
+//         title: `Signup | ${app_name}`,
+//         noHeader: true,
+//         noFooter: true,
+//         app_name,
+//         message
+//     });
+// });
 
-router.post('/signup', isUser, function (req, res, next) {
-    // console.log(req.body);
-    // let user = req.body
+// router.post('/signup', isUser, function (req, res, next) {
+//     // console.log(req.body);
+//     // let user = req.body
 
-    authenticate.check_user_exist(user.email).then((response) => {
-        if (user.password == user.cpassword) {
-            authenticate.do_signup(user).then((response) => {
-                // console.log(user);
-                // console.log(response);
-                res.redirect('/login')
-            })
-        } else {
-            req.flash('message', `Password not match`);
-            res.redirect('/signup');
-        }
-    }).catch((error) => {
-        req.flash('message', `${error}`);
-        res.redirect('/signup');
-    })
+//     authenticate.check_user_exist(user.email).then((response) => {
+//         if (user.password == user.cpassword) {
+//             authenticate.do_signup(user).then((response) => {
+//                 // console.log(user);
+//                 // console.log(response);
+//                 res.redirect('/login')
+//             })
+//         } else {
+//             req.flash('message', `Password not match`);
+//             res.redirect('/signup');
+//         }
+//     }).catch((error) => {
+//         req.flash('message', `${error}`);
+//         res.redirect('/signup');
+//     })
 
-});
+// });
 
 router.post('/admin/add-admin', function (req, res, next) {
     // console.log(req.body);

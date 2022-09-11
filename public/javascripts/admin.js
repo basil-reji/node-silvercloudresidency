@@ -43,3 +43,20 @@ function removeAdmin(id) {
         })
     }
 }
+
+function deleteFacility(id) {
+    if (confirm("Are you sure?. Do you want to delete? ") == true) {
+        $.ajax({
+            url: `/admin/facilities/delete/`,
+            data: {
+                id: id
+            },
+            method: 'post',
+            success: (response) => {
+                if (response.status) {
+                    $(`#row-${id}`).remove()
+                }
+            },
+        })
+    }
+}

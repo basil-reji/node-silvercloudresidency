@@ -14,9 +14,9 @@ body {
     font-family: $font_family_2;
 }
 
-@import "./admin/nav/sidebar";
-@import "./admin/nav/header";
-@import "./admin/nav/footer";
+@import "./admin/partials/sidebar";
+@import "./admin/partials/header";
+@import "./admin/partials/footer";
 
 :root {
     scroll-behavior: smooth;
@@ -44,7 +44,7 @@ h6 {
     top: 0;
     right: 0;
     z-index: 1;
-    padding: 0rem 2rem;
+    // padding: 0rem 2rem;
     padding-top: 5rem;
     overflow-x: hidden;
     transition: all 0.3s ease-in-out;
@@ -71,11 +71,13 @@ h6 {
 
 section {
     width: 100%;
+    padding: 0rem 2rem;
 }
 
 .pagetitle {
     margin: 0rem;
     margin-bottom: 1rem;
+    padding: 0rem 2rem;
 
     h2 {
         font-size: 24px;
@@ -85,7 +87,7 @@ section {
     }
 
     .breadcrumb {
-        font-size: 14px;
+        font-size: 0.8rem;
         font-family: "Nunito", sans-serif;
         color: rgba($color: $color_4, $alpha: 0.5);
         font-weight: 600;

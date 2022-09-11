@@ -1,0 +1,36 @@
+<section class="servces">
+    <div class="row justify-content-center">
+        <div class="col-12 col-sm-8 col-md-6 col-lg-4">
+            <div class="forms">
+                <div class="log_head">
+                    <h3>Edit Facility</h3>
+                </div>
+                {{#if message}}<p class="error">{{message}}</p>{{/if}}
+                <form action="/admin/facilities/update/{{facility._id}}" method="post" role="form" class="log-form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="name" id="name" placeholder="Name"
+                            value="{{facility.name}}" {{#if user.permission.full_control}}required{{else}}disabled{{/if}}>
+                    </div>
+                    <div class="form-group">
+                        <span class="input-group-text">#</span>
+                        <input type="tag" class="form-control" name="tag" id="tag" placeholder="Tag" value="{{facility.tag}}"
+                            disabled required>
+                    </div>
+                    <div class="form-group">
+                        <input type="number" class="form-control" name="count" id="count" placeholder="Count"
+                            value="{{facility.count}}" {{#if user.permission.full_control}}required{{else}}disabled{{/if}}>
+                    </div>
+                    <div class="form-group">
+                        <span class="input-group-text">&#8377</span>
+                        <input type="number" class="form-control" name="price" id="price" placeholder="Price"
+                            value="{{facility.price}}" required>
+                    </div>
+                    <div class="btn-group">
+                        <button type="submit" class="btn-primary">Update Facility</button>
+                        <a href="/admin/facilities" class="btn">Cancel</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>

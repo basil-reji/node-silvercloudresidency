@@ -34,6 +34,7 @@ module.exports = {
             user.sname = inf.sname;
             user.email = inf.email;
             user.password = await bcrypt.hash(inf.password, 10);
+            user.events.careted = new Date()
             db.get()
                 .collection(process.env.DB_COLLECTION_USER)
                 .insertOne(user)

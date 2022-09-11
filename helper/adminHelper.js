@@ -9,7 +9,7 @@ module.exports = {
         let user = {};
         user.fname = data.fname;
         user.sname = data.sname;
-        if(data.phone.length > 5){
+        if (data.phone.length > 5) {
             user.phone = data.phone;
         }
         return new Promise((resolve, reject) => {
@@ -94,7 +94,7 @@ module.exports = {
             user.permission = model.permission;
             user.fname = data.fname;
             user.sname = data.sname;
-            user.role = model.role
+            user.role = model.role;
         } else if (data.role == 'super_admin') {
             let model = db.models.super_admin;
             user.permission = model.permission;
@@ -160,6 +160,103 @@ module.exports = {
         return new Promise((resolve, reject) => {
             db.get()
                 .collection(process.env.DB_COLLECTION_MESSAGE)
+                .remove(
+                    {
+                        _id: ObjectId(id)
+                    }
+                )
+                .then((response) => {
+                    // console.log(response)
+                    resolve(response);
+                }).catch((error) => {
+                    reject(error);
+                })
+        })
+    },
+}
+
+module.exports.facilities = {
+
+    add: (info) => {
+        return new Promise(async (resolve, reject) => {
+            let facility = db.models.facility;
+            facility.name = info.name
+            facility.tag = info.tag
+            facility.count = info.count
+            facility.price = info.price
+            facility.events.careted = new Date()
+            db.get()
+                .collection(process.env.DB_COLLECTION_FACILITY)
+                .insertOne(facility)
+                .then((response) => {
+                    resolve(response)
+                }).catch((error) => {
+                    reject(error)
+                })
+        })
+    },
+
+    getAll: () => {
+        return new Promise((resolve, reject) => {
+            db.get()
+                .collection(process.env.DB_COLLECTION_FACILITY)
+                .find()
+                .toArray()
+                .then((response) => {
+                    // console.log(response)
+                    resolve(response);
+                }).catch((error) => {
+                    reject(error);
+                })
+        })
+    },
+
+    getOne: (tag) => {
+        return new Promise((resolve, reject) => {
+            db.get()
+                .collection(process.env.DB_COLLECTION_FACILITY)
+                .findOne(
+                    {
+                        'tag': tag
+                    }
+                )
+                .then((response) => {
+                    resolve(response);
+                }).catch((error) => {
+                    reject(error);
+                })
+        })
+    },
+
+    updateOne: (id, data) => {
+        new_data = {};
+        new_data.name = data.name,
+        new_data.price = data.price,
+        new_data.count = data.count
+        return new Promise((resolve, reject) => {
+            db.get()
+                .collection(process.env.DB_COLLECTION_FACILITY)
+                .updateOne(
+                    {
+                        '_id': ObjectId(id)
+                    },
+                    {
+                        $set: new_data,
+                    }
+                )
+                .then((response) => {
+                    // console.log(response)
+                    resolve(response);
+                }).catch((error) => {
+                    reject(error);
+                })
+        })
+    },
+
+    deleteOne: (id) => {
+        return new Promise((resolve, reject) => {
+            db.get()
+                .collection(process.env.DB_COLLECTION_FACILITY)
                 .remove(
                     {
                         _id: ObjectId(id)

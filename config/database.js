@@ -38,7 +38,7 @@ module.exports.models = {
             full_control: false
         },
         events: {
-            careted: '',
+            created: '',
             general: [],
             deleted: '',
         },
@@ -69,7 +69,7 @@ module.exports.models = {
             full_control: false
         },
         events: {
-            careted: '',
+            created: '',
             general: [],
             deleted: '',
         },
@@ -102,7 +102,7 @@ module.exports.models = {
             full_control: true
         },
         events: {
-            careted: '',
+            created: '',
             general: [],
             deleted: '',
         },
@@ -110,5 +110,18 @@ module.exports.models = {
             profile_completed: false,
         }
     },
+
+    facility: {
+        name: '',
+        tag: '',
+        count: '',
+        price: '',
+        status: true,
+        events: {
+            created: '',
+            general: [],
+            deleted: '',
+        }
+    }
 
 }

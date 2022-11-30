@@ -19,4 +19,18 @@ module.exports = {
                 })
         })
     },
+
+    getFacilities: () => {
+        return new Promise(async (resolve, reject) => {
+            db.get()
+                .collection(process.env.DB_COLLECTION_FACILITY)
+                .find()
+                .toArray()
+                .then((response) => {
+                    resolve(response)
+                }).catch((error) => {
+                    reject(error)
+                })
+        })
+    },
 }

@@ -12,7 +12,7 @@
 
                 <div class="card">
 
-                    <form action="/services/booking" method="post" role="form" class="form">
+                    <form action="/booking" method="post" role="form" class="form">
                         <div class="row g-4 justify-content-center align-items-center">
                             <div class="col-12 col-md-6 form-group">
                                 <label for="check_in" class="form-label">Check In</label>
@@ -41,27 +41,23 @@
                                     <option value="2">2</option>
                                     <option value="3">3</option>
                                     <option value="4">4</option>
-                                    <option value="5">5</option>
-                                    <option value="6">6</option>
                                 </select>
                             </div>
                             <div class="col-12 col-md-6 form-group">
-                                <label for="childrens" class="form-label">Room Type</label>
-                                <select name="childrens" class="form-select">
-                                    <option value="deluxe" selected>Deluxe</option>
-                                    <option value="suit">Suit</option>
-                                    <option value="dormitory">Dormitory</option>
+                                <label for="facility" class="form-label">Room Type</label>
+                                <select name="facility" class="form-select">
+                                    {{#each facility}}
+                                    <option value="{{this.tag}}">{{this.name}}</option>
+                                    {{/each}}
                                 </select>
                             </div>
                             <div class="col-12 col-md-6 form-group">
-                                <label for="childrens" class="form-label">Number of Rooms</label>
-                                <select name="childrens" class="form-select">
+                                <label for="facility" class="form-label">Number of Rooms</label>
+                                <select name="facility" class="form-select">
                                     <option value="1" selected>1</option>
                                     <option value="2">2</option>
                                     <option value="3">3</option>
                                     <option value="4">4</option>
-                                    <option value="5">5</option>
-                                    <option value="6">6</option>
                                 </select>
                             </div>
                         </div>

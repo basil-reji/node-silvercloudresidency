@@ -63,7 +63,6 @@ router.get('/messages', isAdmin, function (req, res, next) {
 });
 
 router.post('/messages/delete', isAdmin, function (req, res, next) {
-    let user = req.user
     admin.deleteMessage(req.body.id).then((response) => {
         res.send(
             {

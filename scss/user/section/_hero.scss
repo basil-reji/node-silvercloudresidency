@@ -20,12 +20,12 @@
                 font-size: 5.5rem;
                 line-height: 5rem;
                 font-weight: 700;
-                color: $color_4;
+                color: $white;
                 margin: 2rem 0rem;
             }
 
             p {
-                color: rgba($color: #000000, $alpha: 0.5);
+                color: rgba($color: $color_4, $alpha: 0.85);
                 font-size: 1.5rem;
                 font-family: $font_family_2;
                 width: 55%;

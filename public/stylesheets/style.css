@@ -405,11 +405,11 @@ section .section-footer {
   font-size: 5.5rem;
   line-height: 5rem;
   font-weight: 700;
-  color: #362D24;
+  color: #fff;
   margin: 2rem 0rem;
 }
 #hero-section #hero #hero-content p {
-  color: rgba(0, 0, 0, 0.5);
+  color: rgba(54, 45, 36, 0.85);
   font-size: 1.5rem;
   font-family: "Poppins", sans-serif;
   width: 55%;

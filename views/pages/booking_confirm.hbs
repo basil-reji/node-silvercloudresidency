@@ -3,7 +3,7 @@
     <div class="container">
 
         <div class="section-title">
-            <h2>Booking</h2>
+            <h2>Confirm Booking</h2>
         </div>
 
         <div class="row justify-content-center align-items-center">
@@ -12,7 +12,89 @@
 
                 <div class="card">
 
-                    Hiiii
+                    <form action="/booking/confirm" method="post" role="form" class="form">
+                        <div class="row g-4 justify-content-center align-items-center">
+                            <div class="col-12 col-md-6 form-group">
+                                <label for="checkin" class="form-label">Check In</label>
+                                <input type="date" name="check_in" class="form-control" id="checkin" value="{{booking.checkin}}" required disabled>
+                            </div>
+                            <div class="col-12 col-md-6 form-group">
+                                <label for="check_out" class="form-label">Check Out</label>
+                                <input type="date" name="checkout" class="form-control" id="checkout" value="{{booking.checkout}}" required disabled>
+                            </div>
+                            <div class="col-12 col-md-6 form-group">
+                                <label for="adults" class="form-label">Adults</label>
+                                <select name="adults" class="form-select" disabled>
+                                    <option value="1" {{#if (compare booking.adults 1)}}selected{{/if}}>1</option>
+                                    <option value="2" {{#if (compare booking.adults 2)}}selected{{/if}}>2</option>
+                                    <option value="3" {{#if (compare booking.adults 3)}}selected{{/if}}>3</option>
+                                    <option value="4" {{#if (compare booking.adults 4)}}selected{{/if}}>4</option>
+                                    <option value="5" {{#if (compare booking.adults 5)}}selected{{/if}}>5</option>
+                                    <option value="6" {{#if (compare booking.adults 6)}}selected{{/if}}>6</option>
+                                </select>
+                            </div>
+                            <div class="col-12 col-md-6 form-group">
+                                <label for="childrens" class="form-label">Childrens</label>
+                                <select name="childrens" class="form-select" disabled>
+                                    <option value="0" {{#if (compare booking.children 0)}}selected{{/if}}>0</option>
+                                    <option value="1" {{#if (compare booking.children 1)}}selected{{/if}}>1</option>
+                                    <option value="2" {{#if (compare booking.children 2)}}selected{{/if}}>2</option>
+                                    <option value="3" {{#if (compare booking.children 3)}}selected{{/if}}>3</option>
+                                    <option value="4" {{#if (compare booking.children 4)}}selected{{/if}}>4</option>
+                                </select>
+                            </div>
+                            <div class="col-12 col-md-6 form-group">
+                                <label for="facility" class="form-label">Room Type</label>
+                                <select name="facility" class="form-select" disabled>
+                                    {{#each facilities}}
+                                    <option value="{{this.tag}}" {{#if (compare this.tag booking.facility)}}selected{{/if}}>{{this.name}}</option>
+                                    {{/each}}
+                                </select>
+                            </div>
+                            <div class="col-12 col-md-6 form-group">
+                                <label for="facility_count" class="form-label">Number of Rooms</label>
+                                <select name="facility_count" class="form-select" disabled>
+                                    <option value="1" {{#if (compare booking.facility_count 1)}}selected{{/if}}>1</option>
+                                    <option value="2" {{#if (compare booking.facility_count 2)}}selected{{/if}}>2</option>
+                                    <option value="3" {{#if (compare booking.facility_count 3)}}selected{{/if}}>3</option>
+                                    <option value="4" {{#if (compare booking.facility_count 4)}}selected{{/if}}>4</option>
+                                </select>
+                            </div>
+                            <div class="col-12 col-md-12 form-group">
+                                <label for="name" class="form-label">Full Name</label>
+                                <input type="text" name="name" class="form-control" id="name" required>
+                            </div>
+                            <div class="col-12 col-md-6 form-group">
+                                <label for="phone" class="form-label">Phone</label>
+                                <input type="tel" name="phone" class="form-control" id="phone" required>
+                            </div>
+                            <div class="col-12 col-md-6 form-group">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" name="email" class="form-control" id="email" required>
+                            </div>
+                            <div class="col-12 col-md-12 form-group">
+                                <label for="address" class="form-label">Address</label>
+                                <input type="text" name="address" class="form-control" id="address" required>
+                            </div>
+                        </div>
+
+                        <div class="row mt-4 g-3 justify-content-center align-items-center">
+                            <div class="col-12 col-md-8 form-group">
+                                <h5>Price Per Room: <span>{{cost_per_room}}</span></h5>
+                                <h5>Total Amount: <span>{{total_price}}</span></h5>
+                            </div>
+                        </div>
+
+                        <div class="row mt-4 g-3 justify-content-center align-items-center">
+                            <div class="col-12 col-md-8 form-group">
+                                <button type="submit" class="btn w-100">Cancel</button>
+                            </div>
+                            <div class="col-12 col-md-8 form-group">
+                                <button type="submit" class="btn form-btn w-100">Confirm Booking</button>
+                            </div>
+                        </div>
+
+                    </form>
 
                 </div>
             </div>

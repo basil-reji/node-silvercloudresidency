@@ -122,6 +122,46 @@ module.exports.models = {
             general: [],
             deleted: '',
         }
-    }
+    },
 
+    booking:{
+        date: '',
+        checkin: '',
+        checkout: '',
+        duration: '',
+        status: true,
+        payemnt_status: false,
+        booking_status: 'pending',
+        facility: {
+            name: '',
+            count: '',
+            price: '',
+        },
+        counts: {
+            adults: '',
+            children: '',
+            total: '',
+        },
+        poc:{
+            name: '',
+            phone: '',
+            email: '',
+            address: '',
+        },
+        events: {
+            booking: '',
+            confimed: '',
+            payment: '',
+            cancelled: '',
+        }
+    },
+
+    day: {
+        date: '',
+        events: {},
+        facilities: {
+            
+        },
+        status: true,
+    },
 }

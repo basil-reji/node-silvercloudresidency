@@ -1,0 +1,177 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css" />
+<section id="account" class="section">
+    <div class="row justify-content-center align-items-center">
+        <div class="col-12 col-md-10 col-lg-8 card">
+            <div class="card-body p-4">
+
+                <ul class="nav nav-tabs nav-tabs-bordered">
+
+                    <li class="nav-item">
+                        <button class="nav-link active" data-bs-toggle="tab"
+                            data-bs-target="#profile-overview">Book</button>
+                    </li>
+
+                    <li class="nav-item">
+                        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">
+                            Status</button>
+                    </li>
+
+                    {{!-- <li class="nav-item">
+                        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-change-password">Change
+                            Password</button>
+                    </li> --}}
+
+                </ul>
+                <div class="tab-content py-2">
+
+                    <div class="tab-pane fade show active profile-overview" id="profile-overview">
+
+                        <h5 class="card-title">Book Details</h5>
+
+                        {{#with record.book}}
+                        <div class="row mb-3">
+                            <div class="col-lg-3 col-md-4 label">Book Name:</div>
+                            <div class="col-lg-9 col-md-8">{{name}}</div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-lg-3 col-md-4 label">Author:</div>
+                            <div class="col-lg-9 col-md-8">{{author}}</div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-lg-3 col-md-4 label">Type:</div>
+                            <div class="col-lg-9 col-md-8">{{type}}</div>
+                        </div>
+                        {{/with}}
+                        <h5 class="card-title">Reader Details</h5>
+                        {{#with record.reader}}
+                        <div class="row mb-3">
+                            <div class="col-lg-3 col-md-4 label">ID:</div>
+                            <div class="col-lg-9 col-md-8">{{libreary_id}}</div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-lg-3 col-md-4 label">Name:</div>
+                            <div class="col-lg-9 col-md-8">{{name}}</div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-lg-3 col-md-4 label">Email:</div>
+                            <div class="col-lg-9 col-md-8">{{email}}</div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-lg-3 col-md-4 label">Phone:</div>
+                            <div class="col-lg-9 col-md-8">{{phone}}</div>
+                        </div>
+                        {{/with}}
+                        <div class="row mb-3">
+                            <div class="col-lg-3 col-md-4 label">Date</div>
+                            <div class="col-lg-9 col-md-8">{{formatDateOnly record.date}}</div>
+                        </div>
+                        {{#if returned}}
+                        <div class="row mb-3">
+                            <div class="col-lg-3 col-md-4 label">Status:</div>
+                            <div class="col-lg-9 col-md-8"><span class="badge bg-success">Returned</span></div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-lg-3 col-md-4 label">Returned Date:</div>
+                            <div class="col-lg-9 col-md-8">{{formatDateOnly record.returned_date}}</div>
+                        </div>
+                        {{else}}
+                        <div class="row mb-3">
+                            <div class="col-lg-3 col-md-4 label">Returned Status:</div>
+                            <div class="col-lg-9 col-md-8">
+                                {{#if record.returned}}
+                                <span class="badge bg-success">Returned</span>
+                                {{else}}
+                                <span class="badge bg-error">Not Returned</span>
+                                {{/if}}
+                            </div>
+                        </div>
+                        {{/if}}
+                    </div>
+
+                    <div class="tab-pane fade profile-edit" id="profile-edit">
+
+                        <h5 class="card-title">Update Status</h5>
+                        <form action="/admin/records/update/{{record._id}}" method="post">
+                            {{#with record.reader}}
+
+                            <div class="row mb-3">
+                                <label for="ID" class="col-md-4 col-lg-3 col-form-label">Libreary ID</label>
+                                <div class="col-md-8 col-lg-9">
+                                    <input name="libreary_id" type="text" class="form-control" id="librearyid"
+                                        value="{{libreary_id}}" required disabled>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label for="name" class="col-md-4 col-lg-3 col-form-label">Name</label>
+                                <div class="col-md-8 col-lg-9">
+                                    <input name="name" type="text" class="form-control" id="name" value="{{name}}"
+                                        required disabled>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label for="Phone" class="col-md-4 col-lg-3 col-form-label">Phone</label>
+                                <div class="col-md-8 col-lg-9">
+                                    <input name="phone" type="tel" class="form-control" id="phone" value="{{phone}}"
+                                        required disabled>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label for="Email" class="col-md-4 col-lg-3 col-form-label">Email</label>
+                                <div class="col-md-8 col-lg-9">
+                                    <input name="email" type="email" class="form-control" id="email" value="{{email}}"
+                                        required disabled>
+                                </div>
+                            </div>
+
+                            {{/with}}
+
+                            <div class="row mb-3">
+                                <label for="Date" class="col-md-4 col-lg-3 col-form-label">Date</label>
+                                <div class="col-md-8 col-lg-9">
+                                    <input name="date" type="date" class="form-control" id="date"
+                                        value="{{formatDateOnlyReverse record.date}}" required disabled>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label for="status" class="col-md-4 col-lg-3 col-form-label">Status</label>
+                                <div class="col-md-8 col-lg-9">
+                                    <select name="returned" class="form-select form-control"
+                                        aria-label="Default select example">
+                                        <option value="0" {{#if record.returned}} {{else}}selected{{/if}}>Not Returned
+                                        </option>
+                                        <option value="1" {{#if record.returned}}selected{{/if}}>Returned</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <input type="hidden" id="book_id" name="id" value="{{record.book._id}}">
+
+                            <div class="row mb-3">
+                                <label for="Returned_Date" class="col-md-4 col-lg-3 col-form-label">Returned
+                                    Date</label>
+                                <div class="col-md-8 col-lg-9">
+                                    <input name="returned_date" type="date" class="form-control" id="date"
+                                        value="{{formatDateOnlyReverse record.returned_date}}" required>
+                                </div>
+                            </div>
+
+                            <div class="text-center pt-4">
+                                <button type="submit" class="btn-primary">Update Status</button>
+                            </div>
+
+                        </form>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+        <div class="col-12 col-md-8 col-lg-7 m-4 mb-5 d-flex justify-content-center align-items-center">
+            <a href="/admin/records" class="btn">Cancel</a>
+        </div>
+    </div>
+</section>

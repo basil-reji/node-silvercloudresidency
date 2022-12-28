@@ -24,5 +24,22 @@ module.exports = {
             + date.getHours() + ":"
             + date.getMinutes() + ":"
             + date.getSeconds();
-    }
+    },
+    formatDateOnly: (date) => {
+        if (date == '') {
+            return '';
+        } else {
+            var day = date.getDate();
+            var month = date.getMonth() + 1;
+            if (day < 10) {
+                day = '0' + date.getDate();
+            }
+            if (month < 10) {
+                month = '0' + (date.getMonth() + 1);
+            }
+            return day + "-"
+                + month + "-"
+                + date.getFullYear();
+        }
+    },
 };

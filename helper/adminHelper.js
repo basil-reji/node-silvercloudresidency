@@ -271,3 +271,20 @@ module.exports.facilities = {
         })
     },
 }
+
+module.exports.records = {
+    getAll: () => {
+        return new Promise((resolve, reject) => {
+            db.get()
+                .collection(process.env.DB_COLLECTION_BOOKING)
+                .find()
+                .toArray()
+                .then((response) => {
+                    // console.log(response)
+                    resolve(response);
+                }).catch((error) => {
+                    reject(error);
+                })
+        })
+    }
+}

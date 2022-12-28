@@ -28,18 +28,24 @@ const haveFullControll = (req, res, next) => {
 
 router.get('/', isAdmin, function (req, res, next) {
     let user = req.user
-    res.render('admin/dashboard', {
-        title: app_name,
-        page_title: 'Dashboard',
-        breadcrumbs: [
-            {
-                page_name: 'Dashboard',
-                active: true,
-            }
-        ],
-        dashboard_page: true,
-        user
-    });
+    admin.records.getAll().then((records) => {
+        res.render('admin/dashboard', {
+            title: app_name,
+            page_title: 'Dashboard',
+            breadcrumbs: [
+                {
+                    page_name: 'Dashboard',
+                    active: true,
+                }
+            ],
+            records,
+            dashboard_page: true,
+            user
+        });
+    }).catch((error) => {
+        console.log(error);
+        res.redirect('/login');
+    })
 });
 
 router.get('/messages', isAdmin, function (req, res, next) {
@@ -237,7 +243,7 @@ router.post('/facilities/add', isAdmin, haveFullControll, function (req, res, ne
                 .then((response) => {
                     res.redirect('/admin/facilities')
                 })
-        }else{
+        } else {
             req.flash("message", "tag already used")
             res.redirect('/admin/facilities/add')
         }

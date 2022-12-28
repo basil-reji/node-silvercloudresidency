@@ -10,16 +10,17 @@ router.get('/', function (req, res, next) {
     userHelper.getFacilities().then((response) => {
         let facility = response;
         // console.log(facility);
-
+        let error = req.flash('error');
         res.render('pages/booking', {
             title: `Booking | ${app_name}`,
             user,
             facility,
+            error,
             booking_page: true
         })
     }).catch((error) => {
-        // console.log(error);
-        req.redirect('/')
+        console.log(error);
+        res.redirect('/booking')
     })
 
 });
@@ -27,29 +28,35 @@ router.get('/', function (req, res, next) {
 router.get('/confirm', function (req, res, next) {
     let user = req.user;
     let booking = req.session.booking;
-    userHelper.getFacilities().then((response) => {
-        let facilities = response;
-        // userHelper.getFacility(booking.facility).then((response) => {
-        //     let facility = response;
-        //     let total = facility.price * booking.duration;
-            
-        // }).catch((error) => {
-        //     console.log(error);
-        //     req.redirect('/')
-        // })
-        res.render('pages/booking_confirm', {
-            title: `Booking Confirm | ${app_name}`,
-            user,
-            facilities,
-            booking,
-            // total,
-            booking_page: true
-        })
-    }).catch((error) => {
-        console.log(error);
-        req.redirect('/')
-    })
 
+    if (booking) {
+        userHelper.getFacilities().then((response) => {
+            let facilities = response;
+            userHelper.getFacility(booking.facility).then((response) => {
+                let facility = response;
+                let total = facility.price * booking.duration * booking.facility_count;
+                req.session.booking.total = total;
+                req.session.booking.facility = facility;
+                res.render('pages/booking_confirm', {
+                    title: `Booking Confirm | ${app_name}`,
+                    user,
+                    facility,
+                    facilities,
+                    booking,
+                    total,
+                    booking_page: true
+                })
+            }).catch((error) => {
+                console.log(error);
+                req.redirect('/')
+            })
+        }).catch((error) => {
+            console.log(error);
+            req.redirect('/')
+        })
+    } else {
+        res.redirect('/booking')
+    }
 });
 
 router.post('/', function (req, res, next) {
@@ -59,9 +66,42 @@ router.post('/', function (req, res, next) {
     } else {
         req.body.user = null;
     }
-    console.log(req.body);
+    req.body.duration = functionHelper.getDateDifferece(req.body.checkin, req.body.checkout)
+    if (req.body.duration == 0) {
+        req.body.duration = 1;
+    }
+    // console.log(req.body);
     req.session.booking = req.body;
     res.redirect('/booking/confirm')
 });
+
+router.post('/confirm', function (req, res, next) {
+    let user = req.user;
+    let booking = {
+        ...req.session.booking,
+        ...req.body
+    }
+    // console.log(booking);
+    userHelper.addBooking(booking).then((response) => {
+        req.session.booking = {};
+        res.render('pages/confirmation', {
+            title: `Confirmation | ${app_name}`,
+            user,
+            booking_page: true
+        })
+    })
+    .catch((error) => {
+        console.log(error);
+    })
+});
+
+router.get('/confirmation', function (req, res, next) {
+    let user = req.user;
+    res.render('pages/confirmation', {
+        title: `Confirmation | ${app_name}`,
+        user,
+        booking_page: true
+    })
+})
 
 module.exports = router;

@@ -10,10 +10,12 @@
 
             <div class="col-md-6">
 
-                <div class="card">
+                <div class="card py-5">
+
+                    {{!-- error: {{error}} --}}
 
                     <form action="/booking" method="post" role="form" class="form">
-                        <div class="row g-4 justify-content-center align-items-center">
+                        <div class="row g-4 gy-5 justify-content-center align-items-center">
                             <div class="col-12 col-md-6 form-group">
                                 <label for="check_in" class="form-label">Check In</label>
                                 <input type="date" name="checkin" class="form-control" id="checkin" required>
@@ -63,8 +65,8 @@
                         </div>
 
                         <div class="row mt-4 g-3 justify-content-center align-items-center">
-                            <div class="col-12 col-md-8 form-group">
-                                <button type="submit" class="btn w-100">Cancel</button>
+                            <div class="col-12 col-md-8">
+                                <a href="/" class="btn w-100">Cancel</a>
                             </div>
                             <div class="col-12 col-md-8 form-group">
                                 <button type="submit" class="btn form-btn w-100">Book Now</button>

@@ -35,4 +35,9 @@ module.exports = {
         const today = `${yyyy}/${mm}/${dd}`;
         return today;
     },
+    getDateDifferece: (date1, date2) => {
+        const diffTime = Math.abs(new Date(date1) - new Date(date2));
+        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+        return diffDays;
+    }
 };

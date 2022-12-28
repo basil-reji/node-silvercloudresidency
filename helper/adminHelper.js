@@ -184,7 +184,7 @@ module.exports.facilities = {
             facility.tag = info.tag
             facility.count = info.count
             facility.price = info.price
-            facility.events.careted = new Date()
+            facility.events.created = new Date()
             db.get()
                 .collection(process.env.DB_COLLECTION_FACILITY)
                 .insertOne(facility)

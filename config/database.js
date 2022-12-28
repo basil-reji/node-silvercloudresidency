@@ -125,9 +125,10 @@ module.exports.models = {
     },
 
     booking:{
-        date: '',
         checkin: '',
         checkout: '',
+        childrens: '',
+        adults: '',
         duration: '',
         status: true,
         payemnt_status: false,
@@ -136,11 +137,6 @@ module.exports.models = {
             name: '',
             count: '',
             price: '',
-        },
-        counts: {
-            adults: '',
-            children: '',
-            total: '',
         },
         poc:{
             name: '',

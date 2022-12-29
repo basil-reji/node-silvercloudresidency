@@ -21,11 +21,15 @@ const isAdmin = (req, res, next) => {
 router.get('/', isAdmin, async function (req, res, next) {
     let user = req.user
     // console.log(req.user);
-    res.render('index', {
-        title: app_name,
-        user,
-        home_page: true
-    });
+    userHelper.getFacilities().then((facilities) => {
+        // console.log(facilities)
+        res.render('index', {
+            title: app_name,
+            user,
+            facilities,
+            home_page: true
+        });
+    })
 });
 
 router.get('/contact', isAdmin, function (req, res, next) {

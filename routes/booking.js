@@ -97,11 +97,9 @@ router.post('/confirm', isAdmin, function (req, res, next) {
         ...req.session.booking,
         ...req.body
     }
+    delete req.session.booking;
     // console.log(booking);
     userHelper.addBooking(booking).then((response) => {
-        if(req.session){ 
-            req.session.destroy();
-        }
         // console.log(req.session);
         res.render('pages/confirmation', {
             title: `Confirmation | ${app_name}`,
@@ -111,7 +109,7 @@ router.post('/confirm', isAdmin, function (req, res, next) {
     })
     .catch((error) => {
         console.log(error);
-        res.redirect('/booking/confirmation')
+        res.redirect('/booking/')
     })
 });
 

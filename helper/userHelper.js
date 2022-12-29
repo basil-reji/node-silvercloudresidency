@@ -42,6 +42,7 @@ module.exports = {
     addBooking: (info) => {
         return new Promise(async (resolve, reject) => {
             data = db.models.booking;
+            data._id = new ObjectId();
             data.events.booking = new Date();
             data.checkin = new Date(info.checkin);
             data.checkout = new Date(info.checkout);

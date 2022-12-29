@@ -22,7 +22,8 @@ module.exports = {
 
     getFacilities: () => {
         return new Promise(async (resolve, reject) => {
-            db.get()
+            try{
+                db.get()
                 .collection(process.env.DB_COLLECTION_FACILITY)
                 .find()
                 .toArray()
@@ -31,6 +32,10 @@ module.exports = {
                 }).catch((error) => {
                     reject(error)
                 })
+            } catch(error) {
+                console.log(error)
+                resolve('')
+            }
         })
     },
 

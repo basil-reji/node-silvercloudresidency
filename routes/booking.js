@@ -96,7 +96,7 @@ router.post('/confirm', isAdmin, function (req, res, next) {
     }
     // console.log(booking);
     userHelper.addBooking(booking).then((response) => {
-        if(req.session){ req.session.destroy() }
+        if(req.session){ req.session.booking = {} }
         res.render('pages/confirmation', {
             title: `Confirmation | ${app_name}`,
             user,

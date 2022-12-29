@@ -33,7 +33,7 @@ router.get('/', isAdmin, function (req, res, next) {
         })
     }).catch((error) => {
         console.log(error);
-        res.redirect('/booking/confirm')
+        res.redirect('/')
     })
 
 });
@@ -47,6 +47,8 @@ router.get('/confirm', isAdmin, function (req, res, next) {
             let facilities = response;
             userHelper.getFacility(booking.facility).then((response) => {
                 let facility = response;
+                delete facility._id;
+                // console.log(facility);
                 let total = facility.price * booking.duration * booking.facility_count;
                 req.session.booking.total = total;
                 req.session.booking.facility = facility;
@@ -68,7 +70,7 @@ router.get('/confirm', isAdmin, function (req, res, next) {
             res.redirect('/')
         })
     } else {
-        res.redirect('/booking/confirm')
+        res.redirect('/booking')
     }
 });
 
@@ -90,13 +92,17 @@ router.post('/', isAdmin, function (req, res, next) {
 
 router.post('/confirm', isAdmin, function (req, res, next) {
     let user = req.user;
+    // console.log(req.session);
     let booking = {
         ...req.session.booking,
         ...req.body
     }
     // console.log(booking);
     userHelper.addBooking(booking).then((response) => {
-        if(req.session){ req.session.booking = {} }
+        if(req.session){ 
+            req.session.destroy();
+        }
+        // console.log(req.session);
         res.render('pages/confirmation', {
             title: `Confirmation | ${app_name}`,
             user,
@@ -105,7 +111,7 @@ router.post('/confirm', isAdmin, function (req, res, next) {
     })
     .catch((error) => {
         console.log(error);
-        res.redirect('/booking/confirm')
+        res.redirect('/booking/confirmation')
     })
 });
 

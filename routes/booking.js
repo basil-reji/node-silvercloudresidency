@@ -61,11 +61,11 @@ router.get('/confirm', isAdmin, function (req, res, next) {
                 })
             }).catch((error) => {
                 console.log(error);
-                req.redirect('/')
+                res.redirect('/booking/confirm')
             })
         }).catch((error) => {
             console.log(error);
-            req.redirect('/')
+            res.redirect('/')
         })
     } else {
         res.redirect('/booking/confirm')

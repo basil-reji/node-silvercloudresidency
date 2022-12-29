@@ -1,4 +1,3 @@
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css" />
 <section id="account" class="section">
     <div class="row justify-content-center align-items-center">
         <div class="col-12 col-md-10 col-lg-8 card">
@@ -8,7 +7,7 @@
 
                     <li class="nav-item">
                         <button class="nav-link active" data-bs-toggle="tab"
-                            data-bs-target="#profile-overview">Book</button>
+                            data-bs-target="#profile-overview">Facility</button>
                     </li>
 
                     <li class="nav-item">
@@ -25,29 +24,49 @@
                 <div class="tab-content py-2">
 
                     <div class="tab-pane fade show active profile-overview" id="profile-overview">
+                        <h5 class="card-title">Booking Details</h5>
 
-                        <h5 class="card-title">Book Details</h5>
-
-                        {{#with record.book}}
                         <div class="row mb-3">
-                            <div class="col-lg-3 col-md-4 label">Book Name:</div>
+                            <div class="col-lg-3 col-md-4 label">Date of Booking:</div>
+                            <div class="col-lg-9 col-md-8">{{formatDate record.events.booking}}</div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-lg-3 col-md-4 label">Checkin:</div>
+                            <div class="col-lg-9 col-md-8">{{formatDateOnly record.checkin}}</div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-lg-3 col-md-4 label">Checkout:</div>
+                            <div class="col-lg-9 col-md-8">{{formatDateOnly record.checkout}}</div>
+                        </div>
+                        {{#with record.facility}}
+                        <div class="row mb-3">
+                            <div class="col-lg-3 col-md-4 label">Facility Name:</div>
                             <div class="col-lg-9 col-md-8">{{name}}</div>
                         </div>
                         <div class="row mb-3">
-                            <div class="col-lg-3 col-md-4 label">Author:</div>
-                            <div class="col-lg-9 col-md-8">{{author}}</div>
+                            <div class="col-lg-3 col-md-4 label">Price:</div>
+                            <div class="col-lg-9 col-md-8">Rs. {{price}}</div>
                         </div>
                         <div class="row mb-3">
-                            <div class="col-lg-3 col-md-4 label">Type:</div>
-                            <div class="col-lg-9 col-md-8">{{type}}</div>
+                            <div class="col-lg-3 col-md-4 label">Count:</div>
+                            <div class="col-lg-9 col-md-8">{{count}} Nos</div>
                         </div>
                         {{/with}}
-                        <h5 class="card-title">Reader Details</h5>
-                        {{#with record.reader}}
                         <div class="row mb-3">
-                            <div class="col-lg-3 col-md-4 label">ID:</div>
-                            <div class="col-lg-9 col-md-8">{{libreary_id}}</div>
+                            <div class="col-lg-3 col-md-4 label">Duration:</div>
+                            <div class="col-lg-9 col-md-8">{{record.duration}} Days</div>
                         </div>
+                        <div class="row mb-3">
+                            <div class="col-lg-3 col-md-4 label">
+                                <strong>Grand Total:</strong>
+                            </div>
+                            <div class="col-lg-9 col-md-8">
+                                <strong>Rs. {{record.grand_total}}</strong>
+                            </div>
+                        </div>
+                        <h5 class="card-title">Contact Details</h5>
+                        {{#with record.poc}}
                         <div class="row mb-3">
                             <div class="col-lg-3 col-md-4 label">Name:</div>
                             <div class="col-lg-9 col-md-8">{{name}}</div>
@@ -60,30 +79,51 @@
                             <div class="col-lg-3 col-md-4 label">Phone:</div>
                             <div class="col-lg-9 col-md-8">{{phone}}</div>
                         </div>
+                        <div class="row mb-3">
+                            <div class="col-lg-3 col-md-4 label">Address:</div>
+                            <div class="col-lg-9 col-md-8">{{address}}</div>
+                        </div>
                         {{/with}}
+                        <h5 class="card-title">Status Details</h5>
                         <div class="row mb-3">
-                            <div class="col-lg-3 col-md-4 label">Date</div>
-                            <div class="col-lg-9 col-md-8">{{formatDateOnly record.date}}</div>
+                            <div class="col-lg-3 col-md-4 label">Status: </div>
+                            <div class="col-lg-9 col-md-8">
+                                {{#if (compare record.flags.booking "confirmed")}}
+                                <span class="badge bg-success">Confirmed</span>
+                                {{else if (compare record.flags.booking completed)}}
+                                <span class="badge bg-success">Completed</span>
+                                {{else if (compare record.flags.booking "pending")}}
+                                <span class="badge bg-warning">Pending</span>
+                                {{else if (compare record.flags.booking "cancelled")}}
+                                <span class="badge bg-danger">Cancelled</span>
+                                {{else}}
+                                {{/if}}
+                            </div>
                         </div>
-                        {{#if returned}}
+                        {{#if record.flags.payment}}
                         <div class="row mb-3">
-                            <div class="col-lg-3 col-md-4 label">Status:</div>
-                            <div class="col-lg-9 col-md-8"><span class="badge bg-success">Returned</span></div>
+                            <div class="col-lg-3 col-md-4 label">Payment Status:</div>
+                            <div class="col-lg-9 col-md-8"><span class="badge bg-success">Paid</span></div>
                         </div>
                         <div class="row mb-3">
-                            <div class="col-lg-3 col-md-4 label">Returned Date:</div>
-                            <div class="col-lg-9 col-md-8">{{formatDateOnly record.returned_date}}</div>
+                            <div class="col-lg-3 col-md-4 label">Paid On:</div>
+                            <div class="col-lg-9 col-md-8">{{formatDateOnly record.events.payment}}</div>
                         </div>
                         {{else}}
                         <div class="row mb-3">
-                            <div class="col-lg-3 col-md-4 label">Returned Status:</div>
-                            <div class="col-lg-9 col-md-8">
-                                {{#if record.returned}}
-                                <span class="badge bg-success">Returned</span>
-                                {{else}}
-                                <span class="badge bg-error">Not Returned</span>
-                                {{/if}}
-                            </div>
+                            <div class="col-lg-3 col-md-4 label">Payment Status:</div>
+                            <div class="col-lg-9 col-md-8"><span class="badge bg-danger">Not Paid</span></div>
+                        </div>
+                        {{/if}}
+                        {{#if record.flags.contacted}}
+                        <div class="row mb-3">
+                            <div class="col-lg-3 col-md-4 label">Contact Status:</div>
+                            <div class="col-lg-9 col-md-8"><span class="badge bg-success">Contacted</span></div>
+                        </div>
+                        {{else}}
+                        <div class="row mb-3">
+                            <div class="col-lg-3 col-md-4 label">Contact Status:</div>
+                            <div class="col-lg-9 col-md-8"><span class="badge bg-danger">Not Contacted</span></div>
                         </div>
                         {{/if}}
                     </div>
@@ -92,72 +132,46 @@
 
                         <h5 class="card-title">Update Status</h5>
                         <form action="/admin/records/update/{{record._id}}" method="post">
-                            {{#with record.reader}}
 
                             <div class="row mb-3">
-                                <label for="ID" class="col-md-4 col-lg-3 col-form-label">Libreary ID</label>
+                                <label for="status" class="col-md-4 col-lg-3 col-form-label">Booking Status</label>
                                 <div class="col-md-8 col-lg-9">
-                                    <input name="libreary_id" type="text" class="form-control" id="librearyid"
-                                        value="{{libreary_id}}" required disabled>
-                                </div>
-                            </div>
-
-                            <div class="row mb-3">
-                                <label for="name" class="col-md-4 col-lg-3 col-form-label">Name</label>
-                                <div class="col-md-8 col-lg-9">
-                                    <input name="name" type="text" class="form-control" id="name" value="{{name}}"
-                                        required disabled>
-                                </div>
-                            </div>
-
-                            <div class="row mb-3">
-                                <label for="Phone" class="col-md-4 col-lg-3 col-form-label">Phone</label>
-                                <div class="col-md-8 col-lg-9">
-                                    <input name="phone" type="tel" class="form-control" id="phone" value="{{phone}}"
-                                        required disabled>
-                                </div>
-                            </div>
-
-                            <div class="row mb-3">
-                                <label for="Email" class="col-md-4 col-lg-3 col-form-label">Email</label>
-                                <div class="col-md-8 col-lg-9">
-                                    <input name="email" type="email" class="form-control" id="email" value="{{email}}"
-                                        required disabled>
-                                </div>
-                            </div>
-
-                            {{/with}}
-
-                            <div class="row mb-3">
-                                <label for="Date" class="col-md-4 col-lg-3 col-form-label">Date</label>
-                                <div class="col-md-8 col-lg-9">
-                                    <input name="date" type="date" class="form-control" id="date"
-                                        value="{{formatDateOnlyReverse record.date}}" required disabled>
-                                </div>
-                            </div>
-
-                            <div class="row mb-3">
-                                <label for="status" class="col-md-4 col-lg-3 col-form-label">Status</label>
-                                <div class="col-md-8 col-lg-9">
-                                    <select name="returned" class="form-select form-control"
+                                    <select name="status" class="form-select form-control"
                                         aria-label="Default select example">
-                                        <option value="0" {{#if record.returned}} {{else}}selected{{/if}}>Not Returned
+                                         <option value="completed" {{#if (compare record.flags.booking "completed")}}selected{{/if}}>completed</option>
+                                         <option value="confirmed" {{#if (compare record.flags.booking "confirmed")}}selected{{/if}}>confirmed</option>
+                                         <option value="pending" {{#if (compare record.flags.booking "pending")}}selected{{/if}}>pending</option>
+                                         <option value="cancelled" {{#if (compare record.flags.booking "cancelled")}}selected{{/if}}>cancelled</option>
+                                         <option value="rejected" {{#if (compare record.flags.booking "rejected")}}selected{{/if}}>rejected</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="payment" class="col-md-4 col-lg-3 col-form-label">Payment Status</label>
+                                <div class="col-md-8 col-lg-9">
+                                    <select name="payment" class="form-select form-control"
+                                        aria-label="Default select example">
+                                        <option value="0" {{#if record.flags.payment}}{{else}}selected{{/if}}>Not Paid
                                         </option>
-                                        <option value="1" {{#if record.returned}}selected{{/if}}>Returned</option>
+                                        <option value="1" {{#if record.flags.payment}}selected{{/if}}>Paid</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="contacted" class="col-md-4 col-lg-3 col-form-label">Contact Status</label>
+                                <div class="col-md-8 col-lg-9">
+                                    <select name="contacted" class="form-select form-control"
+                                        aria-label="Default select example">
+                                        <option value="0" {{#if record.flags.contacted}}{{else}}selected{{/if}}>Not
+                                            Contacted
+                                        </option>
+                                        <option value="1" {{#if record.flags.contacted}}selected{{/if}}>Contacted
+                                        </option>
                                     </select>
                                 </div>
                             </div>
 
-                            <input type="hidden" id="book_id" name="id" value="{{record.book._id}}">
-
-                            <div class="row mb-3">
-                                <label for="Returned_Date" class="col-md-4 col-lg-3 col-form-label">Returned
-                                    Date</label>
-                                <div class="col-md-8 col-lg-9">
-                                    <input name="returned_date" type="date" class="form-control" id="date"
-                                        value="{{formatDateOnlyReverse record.returned_date}}" required>
-                                </div>
-                            </div>
+                            <input type="hidden" id="book_id" name="id" value="{{record._id}}">
 
                             <div class="text-center pt-4">
                                 <button type="submit" class="btn-primary">Update Status</button>
@@ -171,7 +185,7 @@
             </div>
         </div>
         <div class="col-12 col-md-8 col-lg-7 m-4 mb-5 d-flex justify-content-center align-items-center">
-            <a href="/admin/records" class="btn">Cancel</a>
+            <a href="/admin/" class="btn">Back to Dashboard</a>
         </div>
     </div>
 </section>

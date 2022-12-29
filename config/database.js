@@ -131,8 +131,11 @@ module.exports.models = {
         adults: '',
         duration: '',
         status: true,
-        payemnt_status: false,
-        booking_status: 'pending',
+        flags:{ 
+            payemnt:false,
+            booking:'pending',
+            contacted:false
+        },
         facility: {
             name: '',
             count: '',

@@ -26,9 +26,7 @@ module.exports = {
             + date.getSeconds();
     },
     formatDateOnly: (date) => {
-        if (date == '') {
-            return '';
-        } else {
+        if (date instanceof Date) {
             var day = date.getDate();
             var month = date.getMonth() + 1;
             if (day < 10) {
@@ -40,6 +38,25 @@ module.exports = {
             return day + "-"
                 + month + "-"
                 + date.getFullYear();
+        } else {
+            return '';
         }
     },
+    formatDateOnlyReverse: (date) => {
+        if (date instanceof Date) {
+            var day = date.getDate();
+            var month = date.getMonth() + 1;
+            if (day < 10) {
+                day = '0' + date.getDate();
+            }
+            if (month < 10) {
+                month = '0' + (date.getMonth() + 1);
+            }
+            return date.getFullYear() + "-"
+                + month + "-"
+                + day;
+        }  else {
+            return '';
+        }
+    }
 };

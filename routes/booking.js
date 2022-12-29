@@ -83,7 +83,7 @@ router.post('/confirm', function (req, res, next) {
     }
     // console.log(booking);
     userHelper.addBooking(booking).then((response) => {
-        req.session.booking = {};
+        if(req.session){ req.session.destroy() }
         res.render('pages/confirmation', {
             title: `Confirmation | ${app_name}`,
             user,
@@ -92,6 +92,7 @@ router.post('/confirm', function (req, res, next) {
     })
     .catch((error) => {
         console.log(error);
+        res.redirect('/booking');
     })
 });
 

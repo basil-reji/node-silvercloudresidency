@@ -294,4 +294,75 @@ router.post('/facilities/delete/', isAdmin, haveFullControll, function (req, res
         })
 });
 
+// router.get('/records/:id', isAdmin, function (req, res, next) {
+//     let user = req.user;
+//     admin.records.getOne(req.params.id)
+//         .then((record) => {
+//             res.render('admin/records/view_record', {
+//                 title: app_name,
+//                 page_title: 'Records',
+//                 breadcrumbs: [
+//                     {
+//                         page_name: 'Record',
+//                         page_link: '/admin/records'
+//                     },
+//                     {
+//                         page_name: 'View Details',
+//                         active: true,
+//                     }
+//                 ],
+//                 records_page: true,
+//                 user,
+//                 record
+//             });
+//         })
+// });
+
+router.get('/records/edit/:id', isAdmin, function (req, res, next) {
+    let user = req.user;
+    admin.records.getOne(req.params.id)
+        .then((record) => {
+            // console.log(record)
+            res.render('admin/records/edit_record', {
+                title: app_name,
+                page_title: 'Records',
+                breadcrumbs: [
+                    {
+                        page_name: 'Dashboard',
+                        page_link: '/'
+                    },
+                    {
+                        page_name: 'Edit record',
+                        active: true,
+                    }
+                ],
+                dashboard_page: true,
+                user,
+                record
+            });
+        })
+});
+
+router.post('/records/update/:id', isAdmin, function (req, res, next) {
+    // console.log(req.body)
+    // console.log(req.params.id)
+    admin.records.updateOne(req.params.id, req.body)
+        .then((response) => {
+            res.redirect('/admin/');
+        })
+});
+
+router.post('/records/delete/', isAdmin, haveFullControll, function (req, res, next) {
+    // console.log(req.body)
+    admin.records.deleteOne(req.body.id)
+        .then((response) => {
+            res.send(
+                {
+                    response: "aknowledged",
+                    status: true
+                }
+            );
+        })
+});
+
 module.exports = router;

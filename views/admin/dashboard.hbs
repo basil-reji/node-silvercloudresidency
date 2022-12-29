@@ -137,33 +137,42 @@
                                     <div class="mt-3">
                                         {{this.poc.address}}
                                     </div>
-                                    
+
                                 </th>
                                 <th scope="col">
                                     {{#if this.status}}
-                                        <span class="badge bg-success">Active</span>
+                                    <span class="badge bg-success">Active</span>
                                     {{else}}
-                                        <span class="badge bg-error">Cancelled</span>
-                                        on {{formatDate this.events.cancelled}}
+                                    <span class="badge bg-error">Cancelled</span>
+                                    on {{formatDate this.events.cancelled}}
                                     {{/if}}
-                                    {{#if this.payemnt_status}}
-                                        <span class="badge bg-success">Paid</span>
+                                    {{#if this.flags.payment}}
+                                    <span class="badge bg-success">Paid</span>
                                     {{else}}
-                                        <span class="badge bg-warning">Unpaid</span>
+                                    <span class="badge bg-warning">Unpaid</span>
                                     {{/if}}
-                                    {{#if (compare this.booking_status "confirmed")}}
-                                        <br>
-                                        <span class="badge bg-success">Booking Confirmed</span>
-                                    {{else if (compare this.booking_status completed)}}
-                                        <br>
-                                        <span class="badge bg-success">Booking Completed</span>
-                                    {{else if (compare this.booking_status "pending")}}
-                                        <br>
-                                        <span class="badge bg-warning">Booking Pending</span>
-                                    {{else if (compare this.booking_status "cancelled")}}
-                                        <br>
-                                        <span class="badge bg-error">Booking Cancelled</span>
+                                    {{#if (compare this.flags.booking "confirmed")}}
+                                    <br>
+                                    <span class="badge bg-success">Booking Confirmed</span>
+                                    {{else if (compare this.flags.booking "completed")}}
+                                    <br>
+                                    <span class="badge bg-success">Booking Completed</span>
+                                    {{else if (compare this.flags.booking "pending")}}
+                                    <br>
+                                    <span class="badge bg-warning">Booking Pending</span>
+                                    {{else if (compare this.flags.booking "cancelled")}}
+                                    <br>
+                                    <span class="badge bg-danger">Booking Cancelled</span>
                                     {{else}}
+                                    <br>
+                                    <span class="badge bg-danger">Booking Rejected</span>
+                                    {{/if}}
+                                    {{#if this.flags.contacted}}
+                                    <br>
+                                    <span class="badge bg-success">Contacted</span>
+                                    {{else}}
+                                    <br>
+                                    <span class="badge bg-danger">Not Contacted</span>
                                     {{/if}}
                                 </th>
                                 <td>

@@ -60,3 +60,20 @@ function deleteFacility(id) {
         })
     }
 }
+
+function deleteRecord(id) {
+    if (confirm("Are you sure?. Do you want to delete? ") == true) {
+        $.ajax({
+            url: `/admin/records/delete/`,
+            data: {
+                id: id
+            },
+            method: 'post',
+            success: (response) => {
+                if (response.status) {
+                    $(`#row-${id}`).remove()
+                }
+            },
+        })
+    }
+}

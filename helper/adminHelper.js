@@ -231,8 +231,8 @@ module.exports.facilities = {
     updateOne: (id, data) => {
         new_data = {};
         new_data.name = data.name,
-        new_data.price = data.price,
-        new_data.count = data.count
+            new_data.price = data.price,
+            new_data.count = data.count
         return new Promise((resolve, reject) => {
             db.get()
                 .collection(process.env.DB_COLLECTION_FACILITY)
@@ -286,5 +286,114 @@ module.exports.records = {
                     reject(error);
                 })
         })
-    }
+    },
+
+    getOne: (id) => {
+        return new Promise((resolve, reject) => {
+            db.get()
+                .collection(process.env.DB_COLLECTION_BOOKING)
+                .findOne(
+                    {
+                        '_id': ObjectId(id)
+                    }
+                )
+                .then((response) => {
+                    resolve(response);
+                }).catch((error) => {
+                    reject(error);
+                })
+        })
+    },
+
+    updateOne: (id, info) => {
+        // new_data = {};
+        // new_data.returned = true;
+        // new_data.returned_date = new Date(data.returned_date);
+        // console.log(new_data)
+        return new Promise((resolve, reject) => {
+            // console.log(id, data)
+            db.get()
+                .collection(process.env.DB_COLLECTION_BOOKING)
+                .findOne(
+                    {
+                        '_id': ObjectId(id)
+                    },
+                    {
+                        projection: {
+                            _id: 0,
+                        }
+                    }
+
+                )
+                .then((data) => {
+                    // console.log(info)
+                    data.flags.booking = info.status;
+
+                    if (data.flags.booking == 'cancelled' || data.flags.booking == 'rejected') {
+                        data.status = false;
+                        if (!data.flags.cancelled) {
+                            data.flags.cancelled = true;
+                            data.events.cancelled = new Date();
+                        }
+                    } else {
+                        data.status = true;
+                        data.flags.cancelled = false;
+                        data.events.cancelled = '';
+                        if (info.payment == '1') {
+                            data.flags.booking = 'completed';
+                            data.flags.contacted = true
+                            data.flags.payment = true;
+                            data.events.payment = new Date()
+                            data.events.confirmed = new Date()
+                        } else {
+                            data.flags.payment = false;
+                            if (data.flags.booking == 'completed') {
+                                data.flags.booking = 'pending'
+                            }
+                        }
+
+                        if (info.contacted == '1') {
+                            data.flags.contacted = true;
+                            data.events.contacted = new Date()
+                        } else {
+                            data.flags.contacted = false;
+                        }
+                    }
+
+                    db.get()
+                        .collection(process.env.DB_COLLECTION_BOOKING)
+                        .updateOne(
+                            {
+                                '_id': ObjectId(id)
+                            },
+                            {
+                                $set: data,
+                            }
+                        )
+                        .then((response) => {
+                            resolve(response);
+                        }).catch((error) => {
+                            reject(error);
+                        })
+                })
+        })
+    },
+
+    deleteOne: (id) => {
+        return new Promise((resolve, reject) => {
+            db.get()
+                .collection(process.env.DB_COLLECTION_BOOKING)
+                .deleteOne(
+                    {
+                        _id: ObjectId(id)
+                    }
+                )
+                .then((response) => {
+                    // console.log(response)
+                    resolve(response);
+                }).catch((error) => {
+                    reject(error);
+                })
+        })
+    },
 }

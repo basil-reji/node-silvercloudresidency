@@ -294,8 +294,13 @@ section .section-footer {
   width: 1.75rem;
 }
 @media screen and (max-width: 992px) {
-  #header .logo span {
-    display: none;
+  #header .logo .logo-text {
+    display: flex;
+    flex-direction: column;
+  }
+  #header .logo .logo-text .logo-text-p {
+    font-size: 1rem;
+    margin: 0rem;
   }
   #header #navbar .nav-items {
     display: flex;

@@ -3,9 +3,22 @@ var router = express.Router();
 var userHelper = require('../helper/userHelper');
 var functionHelper = require('../helper/functionHelper');
 
-const app_name = process.env.APP_NAME
+const app_name = process.env.APP_NAME;
 
-router.get('/', function (req, res, next) {
+const isAdmin = (req, res, next) => {
+    let user = req.user;
+    if (user){
+        if (req.user.permission.admin) {
+            res.redirect('/admin');
+        } else {
+            next();
+        }
+    }else{
+        next();
+    }   
+}
+
+router.get('/', isAdmin, function (req, res, next) {
     let user = req.user;
     userHelper.getFacilities().then((response) => {
         let facility = response;
@@ -20,12 +33,12 @@ router.get('/', function (req, res, next) {
         })
     }).catch((error) => {
         console.log(error);
-        res.redirect('/booking')
+        res.redirect('/booking/confirm')
     })
 
 });
 
-router.get('/confirm', function (req, res, next) {
+router.get('/confirm', isAdmin, function (req, res, next) {
     let user = req.user;
     let booking = req.session.booking;
 
@@ -55,11 +68,11 @@ router.get('/confirm', function (req, res, next) {
             req.redirect('/')
         })
     } else {
-        res.redirect('/booking')
+        res.redirect('/booking/confirm')
     }
 });
 
-router.post('/', function (req, res, next) {
+router.post('/', isAdmin, function (req, res, next) {
     let user = req.user;
     if (user) {
         req.body.user = user.id;
@@ -75,7 +88,7 @@ router.post('/', function (req, res, next) {
     res.redirect('/booking/confirm')
 });
 
-router.post('/confirm', function (req, res, next) {
+router.post('/confirm', isAdmin, function (req, res, next) {
     let user = req.user;
     let booking = {
         ...req.session.booking,
@@ -92,11 +105,11 @@ router.post('/confirm', function (req, res, next) {
     })
     .catch((error) => {
         console.log(error);
-        res.redirect('/booking');
+        res.redirect('/booking/confirm')
     })
 });
 
-router.get('/confirmation', function (req, res, next) {
+router.get('/confirmation', isAdmin, function (req, res, next) {
     let user = req.user;
     res.render('pages/confirmation', {
         title: `Confirmation | ${app_name}`,

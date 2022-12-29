@@ -4,22 +4,31 @@ var userHelper = require('../helper/userHelper');
 
 const app_name = process.env.APP_NAME
 
+const isAdmin = (req, res, next) => {
+    let user = req.user;
+    if (user){
+        if (req.user.permission.admin) {
+            res.redirect('/admin');
+        } else {
+            next();
+        }
+    }else{
+        next();
+    }   
+}
+
 /* GET home page. */
-router.get('/', async function (req, res, next) {
+router.get('/', isAdmin, async function (req, res, next) {
     let user = req.user
     // console.log(req.user);
-    if (user && user.permission.admin) {
-        res.redirect('/admin/')
-    } else {
-        res.render('index', {
-            title: app_name,
-            user,
-            home_page: true
-        });
-    }
+    res.render('index', {
+        title: app_name,
+        user,
+        home_page: true
+    });
 });
 
-router.get('/contact', function (req, res, next) {
+router.get('/contact', isAdmin, function (req, res, next) {
     let user = req.user;
     res.render('pages/contact', {
         title: `Contact | ${app_name}`,
@@ -28,7 +37,7 @@ router.get('/contact', function (req, res, next) {
     })
 });
 
-router.get('/gallery', function (req, res, next) {
+router.get('/gallery', isAdmin, function (req, res, next) {
     let user = req.user;
     res.render('pages/gallery', {
         title: `Gallery | ${app_name}`,
@@ -37,7 +46,7 @@ router.get('/gallery', function (req, res, next) {
     })
 });
 
-router.post('/contact', function (req, res, next) {
+router.post('/contact', isAdmin, function (req, res, next) {
     let user = req.user;
     if (user) {
         req.body.user = user.id;
